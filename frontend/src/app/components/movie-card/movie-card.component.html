@@ -1,0 +1,76 @@
+<div class="movie-card-container">
+  <!-- Прогресс -->
+  <div class="progress-bar">
+    <div class="progress-fill" [style.width.%]="(moviesShown / maxMovies) * 100"></div>
+  </div>
+  
+  <div class="progress-text">
+    {{ moviesShown }} / {{ maxMovies }} фильмов
+  </div>
+
+  <!-- Карточка фильма -->
+  <div class="movie-cards-stack" *ngIf="currentMovie">
+    <!-- Следующая карточка (фон) -->
+    <div class="movie-card movie-card-background" *ngIf="currentIndex + 1 < movies.length">
+      <div class="movie-poster">
+        <img [src]="movies[currentIndex + 1].poster" [alt]="movies[currentIndex + 1].title" />
+      </div>
+    </div>
+
+    <!-- Активная карточка -->
+    <div
+      class="movie-card movie-card-active"
+      (mousedown)="onMouseDown($event)"
+      (touchstart)="onTouchStart($event)"
+    >
+      <!-- Постер -->
+      <div class="movie-poster">
+        <img [src]="currentMovie.poster" [alt]="currentMovie.title" />
+        <div class="overlay-like">❤️ НРАВИТСЯ</div>
+        <div class="overlay-dislike">✕ НЕТ</div>
+      </div>
+
+      <!-- Информация -->
+      <div class="movie-info">
+        <h2 class="movie-title">{{ currentMovie.title }}</h2>
+        
+        <div class="movie-meta">
+          <span class="movie-year">{{ currentMovie.year }}</span>
+          <span class="movie-rating">
+            <mat-icon>star</mat-icon>
+            {{ currentMovie.rating }}
+          </span>
+        </div>
+
+        <div class="movie-actors" *ngIf="currentMovie.actors && currentMovie.actors.length > 0">
+          <mat-icon>person</mat-icon>
+          <span>{{ currentMovie.actors.join(', ') }}</span>
+        </div>
+
+        <p class="movie-description">{{ currentMovie.description }}</p>
+
+        <button class="btn-okko" (click)="openOkko()">
+          <mat-icon>play_circle</mat-icon>
+          Смотреть на Okko
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Кнопки действий -->
+  <div class="action-buttons" *ngIf="currentMovie">
+    <button class="action-btn dislike-btn" (click)="dislikeMovie()" mat-fab>
+      <mat-icon>close</mat-icon>
+    </button>
+
+    <button class="action-btn like-btn" (click)="likeMovie()" mat-fab>
+      <mat-icon>favorite</mat-icon>
+    </button>
+  </div>
+
+  <!-- Подсказка -->
+  <div class="hint-text" *ngIf="moviesShown === 0">
+    Свайпните вправо ❤️ или влево ✕
+  </div>
+</div>
+

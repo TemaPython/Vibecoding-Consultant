@@ -1,0 +1,80 @@
+<div class="final-selection-container fade-in">
+  <!-- Загрузка -->
+  <div class="loading-screen" *ngIf="isLoading">
+    <mat-spinner diameter="60" color="primary"></mat-spinner>
+    <h2>Формируем вашу подборку...</h2>
+  </div>
+
+  <!-- Контент -->
+  <div class="final-content" *ngIf="!isLoading">
+    <!-- Заголовок -->
+    <div class="header text-center">
+      <h1 class="title">
+        {{ isDuoMode ? 'Ваша общая подборка' : 'Ваша подборка' }}
+      </h1>
+      <p class="subtitle" *ngIf="likedMovies.length > 0">
+        {{ likedMovies.length }} {{ likedMovies.length === 1 ? 'фильм' : (likedMovies.length < 5 ? 'фильма' : 'фильмов') }}, которые вам понравились
+      </p>
+    </div>
+
+    <!-- Список фильмов -->
+    <div class="movies-grid" *ngIf="likedMovies.length > 0">
+      <div class="movie-item" *ngFor="let movie of likedMovies; let i = index" [style.animation-delay.ms]="i * 100">
+        <div class="movie-poster">
+          <img [src]="movie.poster" [alt]="movie.title" />
+          <div class="movie-overlay">
+            <button class="play-button" (click)="openOkko(movie)" mat-fab color="primary">
+              <mat-icon>play_arrow</mat-icon>
+            </button>
+          </div>
+        </div>
+        
+        <div class="movie-details">
+          <h3 class="movie-title">{{ movie.title }}</h3>
+          
+          <div class="movie-meta">
+            <span class="movie-year">{{ movie.year }}</span>
+            <span class="movie-rating">
+              <mat-icon>star</mat-icon>
+              {{ movie.rating }}
+            </span>
+          </div>
+
+          <p class="movie-description">{{ movie.description }}</p>
+
+          <button class="btn-watch" (click)="openOkko(movie)">
+            <mat-icon>play_circle</mat-icon>
+            Смотреть на Okko
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Пустая подборка -->
+    <div class="empty-state" *ngIf="likedMovies.length === 0">
+      <div class="empty-icon">
+        <mat-icon>movie_filter</mat-icon>
+      </div>
+      <h2>{{ isDuoMode ? 'Вы не сошлись ни в одном фильме' : 'Вы не лайкнули ни один фильм' }}</h2>
+      <p>{{ isDuoMode ? 'Давайте попробуем ещё раз с другими предпочтениями' : 'Попробуйте ещё раз с другими предпочтениями' }}</p>
+      
+      <button class="btn-pink" (click)="refineSelection()">
+        Уточнить предпочтения
+      </button>
+    </div>
+
+    <!-- Действия -->
+    <div class="actions" *ngIf="likedMovies.length > 0">
+      <button class="btn-outline-pink" (click)="startOver()">
+        <mat-icon>refresh</mat-icon>
+        Начать заново
+      </button>
+      
+      <button class="btn-pink" (click)="refineSelection()">
+        <mat-icon>tune</mat-icon>
+        Уточнить подборку
+      </button>
+    </div>
+  </div>
+</div>
+

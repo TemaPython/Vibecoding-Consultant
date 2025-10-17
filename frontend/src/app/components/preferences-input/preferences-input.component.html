@@ -1,0 +1,94 @@
+<div class="preferences-container fade-in">
+  <div class="preferences-content">
+    <!-- Заголовок -->
+    <div class="header text-center">
+      <h1 class="title">Расскажите о своих предпочтениях</h1>
+      <p class="subtitle">
+        Опишите, что бы вы хотели посмотреть. Например: жанр, актёры, настроение
+      </p>
+    </div>
+
+    <!-- Форма ввода предпочтений -->
+    <div class="preferences-form" *ngIf="!waitingForSecondUser && !showAiDialog">
+      <mat-form-field appearance="outline" class="preferences-input">
+        <mat-label>Ваши предпочтения</mat-label>
+        <textarea
+          matInput
+          [(ngModel)]="preferences"
+          placeholder="Например: хочу что-то спокойное, мелодраму или комедию с Райаном Гослингом"
+          rows="6"
+          [disabled]="isLoading"
+        ></textarea>
+        <mat-hint>Чем подробнее, тем лучше подберём фильм</mat-hint>
+      </mat-form-field>
+
+      <div class="form-actions">
+        <button
+          class="btn-pink"
+          (click)="onSubmit()"
+          [disabled]="!preferences.trim() || isLoading"
+        >
+          <span *ngIf="!isLoading">Найти фильмы</span>
+          <span *ngIf="isLoading">
+            <mat-spinner diameter="20" style="display: inline-block; margin-right: 8px;"></mat-spinner>
+            Загрузка...
+          </span>
+        </button>
+      </div>
+
+      <!-- Подсказки -->
+      <div class="suggestions">
+        <p class="suggestions-title">Не знаете что написать? Попробуйте:</p>
+        <div class="suggestion-chips">
+          <button
+            class="suggestion-chip"
+            (click)="preferences = 'Хочу что-то спокойное и атмосферное'"
+            [disabled]="isLoading"
+          >
+            Спокойное и атмосферное
+          </button>
+          <button
+            class="suggestion-chip"
+            (click)="preferences = 'Страшный фильм для вечера'"
+            [disabled]="isLoading"
+          >
+            Страшный фильм
+          </button>
+          <button
+            class="suggestion-chip"
+            (click)="preferences = 'Комедия для хорошего настроения'"
+            [disabled]="isLoading"
+          >
+            Лёгкая комедия
+          </button>
+          <button
+            class="suggestion-chip"
+            (click)="preferences = 'Драма с глубоким смыслом'"
+            [disabled]="isLoading"
+          >
+            Драма с смыслом
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ожидание второго пользователя -->
+    <div class="waiting-screen" *ngIf="waitingForSecondUser && !showAiDialog">
+      <div class="waiting-content">
+        <mat-spinner diameter="60" color="primary"></mat-spinner>
+        <h2>Ожидаем второго пользователя</h2>
+        <p>Как только ваш друг введёт свои предпочтения, мы сразу подберём фильмы для вас обоих</p>
+      </div>
+    </div>
+
+    <!-- AI Диалог -->
+    <app-ai-dialog
+      *ngIf="showAiDialog"
+      [initialMessage]="preferences"
+      [sessionId]="sessionId!"
+      (complete)="onAiDialogComplete($event)"
+      (cancel)="onAiDialogCancel()"
+    ></app-ai-dialog>
+  </div>
+</div>
+

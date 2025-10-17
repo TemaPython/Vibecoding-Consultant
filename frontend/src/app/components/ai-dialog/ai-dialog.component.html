@@ -1,0 +1,62 @@
+<div class="ai-dialog-container fade-in">
+  <div class="ai-dialog-content">
+    <!-- Заголовок -->
+    <div class="dialog-header">
+      <h2>Давайте уточним</h2>
+      <p>Несколько вопросов помогут подобрать идеальный фильм</p>
+    </div>
+
+    <!-- Сообщения -->
+    <div class="messages-container">
+      <div
+        *ngFor="let message of messages"
+        class="message"
+        [ngClass]="{ 'message-ai': message.isAI, 'message-user': !message.isAI }"
+      >
+        <div class="message-bubble">
+          <p>{{ message.text }}</p>
+        </div>
+      </div>
+
+      <!-- Индикатор печати -->
+      <div class="message message-ai" *ngIf="isTyping">
+        <div class="message-bubble typing-indicator">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ввод сообщения -->
+    <div class="message-input">
+      <mat-form-field appearance="outline" class="input-field">
+        <input
+          matInput
+          [(ngModel)]="currentMessage"
+          placeholder="Ваш ответ..."
+          (keyup.enter)="sendMessage()"
+          [disabled]="isLoading"
+        />
+      </mat-form-field>
+      
+      <button
+        class="send-button"
+        (click)="sendMessage()"
+        [disabled]="!currentMessage.trim() || isLoading"
+        mat-fab
+        color="primary"
+      >
+        <mat-icon>send</mat-icon>
+      </button>
+    </div>
+
+    <!-- Кнопка отмены -->
+    <div class="dialog-actions">
+      <button class="btn-outline-pink" (click)="onCancel()">
+        Отменить
+      </button>
+    </div>
+  </div>
+</div>
+

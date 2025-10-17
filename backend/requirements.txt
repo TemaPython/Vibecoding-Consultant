@@ -1,0 +1,20 @@
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+pydantic==2.5.0
+python-multipart==0.0.6
+
+# База данных (раскомментировать при необходимости)
+# sqlalchemy==2.0.23
+# psycopg2-binary==2.9.9
+# redis==5.0.1
+
+# AI интеграция (раскомментировать при необходимости)
+# openai==1.3.5
+# langchain==0.0.340
+# anthropic==0.7.0
+
+# Дополнительно
+# python-jose[cryptography]==3.3.0
+# passlib[bcrypt]==1.7.4
+# python-dotenv==1.0.0
+

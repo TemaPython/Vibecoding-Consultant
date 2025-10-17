@@ -1,0 +1,48 @@
+<div class="welcome-container fade-in">
+  <div class="welcome-content">
+    <!-- Логотип и название -->
+    <div class="header text-center">
+      <h1 class="app-title">Дайкинчик</h1>
+      <p class="app-subtitle">Найдём идеальный фильм для вашего настроения</p>
+    </div>
+
+    <!-- Выбор режима -->
+    <div class="mode-selection">
+      <h2 class="question">Как будете смотреть фильм?</h2>
+      
+      <div class="mode-cards">
+        <!-- Режим "Один" -->
+        <div class="mode-card" (click)="!isLoading && selectMode('single')">
+          <div class="mode-icon">
+            <mat-icon>person</mat-icon>
+          </div>
+          <h3>Один</h3>
+          <p>Персональный подбор фильмов под ваши предпочтения</p>
+        </div>
+
+        <!-- Режим "Вдвоём" -->
+        <div class="mode-card" (click)="!isLoading && selectMode('duo')">
+          <div class="mode-icon">
+            <mat-icon>people</mat-icon>
+          </div>
+          <h3>Вдвоём</h3>
+          <p>Найдём фильм, который понравится обоим</p>
+        </div>
+      </div>
+
+      <!-- Индикатор загрузки -->
+      <div class="loading-indicator" *ngIf="isLoading">
+        <mat-spinner diameter="40" color="primary"></mat-spinner>
+        <p>Создаём сессию...</p>
+      </div>
+    </div>
+
+    <!-- Описание -->
+    <div class="features text-center">
+      <p class="feature-text">
+        🎬 Умный подбор · 💬 Диалог с ИИ · ⭐ Персонализация
+      </p>
+    </div>
+  </div>
+</div>
+

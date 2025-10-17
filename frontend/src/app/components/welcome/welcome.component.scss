@@ -1,0 +1,148 @@
+.welcome-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.welcome-content {
+  max-width: 800px;
+  width: 100%;
+}
+
+.header {
+  margin-bottom: 60px;
+
+  .app-title {
+    font-size: 56px;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--pink-500) 0%, var(--pink-400) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 16px;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  .app-subtitle {
+    font-size: 20px;
+    color: var(--gray-800);
+    font-weight: 400;
+  }
+}
+
+.mode-selection {
+  margin-bottom: 40px;
+
+  .question {
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--gray-800);
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  .mode-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin-bottom: 24px;
+  }
+
+  .mode-card {
+    background: white;
+    border-radius: 20px;
+    padding: 40px 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(236, 72, 153, 0.1);
+    border: 2px solid transparent;
+
+    &:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 30px rgba(236, 72, 153, 0.2);
+      border-color: var(--pink-300);
+    }
+
+    .mode-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 20px;
+      background: linear-gradient(135deg, var(--pink-100) 0%, var(--pink-200) 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      mat-icon {
+        font-size: 40px;
+        width: 40px;
+        height: 40px;
+        color: var(--pink-600);
+      }
+    }
+
+    h3 {
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--gray-800);
+      margin-bottom: 12px;
+    }
+
+    p {
+      font-size: 16px;
+      color: var(--gray-800);
+      opacity: 0.7;
+      line-height: 1.5;
+    }
+  }
+
+  .loading-indicator {
+    text-align: center;
+    padding: 20px;
+
+    mat-spinner {
+      margin: 0 auto 16px;
+    }
+
+    p {
+      color: var(--pink-600);
+      font-weight: 500;
+    }
+  }
+}
+
+.features {
+  .feature-text {
+    font-size: 18px;
+    color: var(--gray-800);
+    opacity: 0.8;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    margin-bottom: 40px;
+
+    .app-title {
+      font-size: 40px;
+    }
+
+    .app-subtitle {
+      font-size: 18px;
+    }
+  }
+
+  .mode-selection {
+    .question {
+      font-size: 24px;
+    }
+
+    .mode-cards {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
