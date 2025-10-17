@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Backend зависимости
 # Для запуска используйте: pip install -r backend/requirements.txt
 
@@ -10,3 +11,11 @@ python-multipart==0.0.6
 # Frontend зависимости устанавливаются через npm:
 # cd frontend && npm install
 
+=======
+pandas
+pyarrow
+openai>=1.0.0
+numpy
+scikit-learn
+python-dotenv
+>>>>>>> 8f0c73f5ef4a36f855ace42799739395e1ba72df
